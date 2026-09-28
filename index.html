@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dinner date, Elizabeth?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBE3DD;
+    --ink: #4A0E17;
+    --soft: #8A3A44;
+    --broth: #B3202A;
+    --gold: #E8A93B;
+    --bowl: #4A0E17;
+    --btn-ink: #FFF4EC;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #2B080E;
+      --ink: #FCE6DF;
+      --soft: #E0A9A5;
+      --broth: #D63A3A;
+      --gold: #F2BE55;
+      --bowl: #150306;
+      --btn-ink: #FFF4EC;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #2B080E;
+    --ink: #FCE6DF;
+    --soft: #E0A9A5;
+    --broth: #D63A3A;
+    --gold: #F2BE55;
+    --bowl: #150306;
+    --btn-ink: #FFF4EC;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1.25rem;
+  }
+  main {
+    width: 100%;
+    max-width: 30rem;
+    text-align: center;
+  }
+  .bowl { width: min(14rem, 60vw); height: auto; display: block; margin: 0 auto 1rem; }
+  .steam path {
+    fill: none;
+    stroke: var(--soft);
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: .55;
+    animation: rise 3.2s ease-in-out infinite;
+  }
+    @keyframes rise {
+    0%   { transform: translateY(6px); opacity: 0; }
+    40%  { opacity: .6; }
+    100% { transform: translateY(-10px); opacity: 0; }
+  }
+  h1 {
+    font-family: "Shrikhand", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 9vw, 3.6rem);
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    color: var(--broth);
+  }
+  p { font-size: 1.1rem; line-height: 1.55; margin: 0 auto 1.75rem; max-width: 26rem; }
+  .when { color: var(--soft); font-weight: 600; margin-top: -1rem; }
+  .choices { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+  button {
+    font: 600 1.15rem/1 "Work Sans", system-ui, sans-serif;
+    color: var(--btn-ink);
+    background: var(--broth);
+    border: 0;
+    border-radius: 999px;
+    padding: 1rem 1.9rem;
+    cursor: pointer;
+    transition: transform .15s ease;
+  }
+  button.alt { background: var(--gold); color: #3A0A10; }
+  button:hover { transform: scale(1.05); }
+  button:active { transform: scale(.97); }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .answer { display: none; }
+  .answered .ask { display: none; }
+  .answered .answer { display: block; animation: pop .5s ease-out; }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .heart {
+    position: fixed;
+    top: -2rem;
+    font-size: 1.6rem;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall { to { transform: translateY(110vh) rotate(40deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .steam path, .heart, .answered .answer { animation: none; }
+    .heart { display: none; }
+  }
+</style>
+</head>
+<body>
+<main id="card">
+  <svg class="bowl" viewBox="0 0 200 170" aria-hidden="true">
+    <g class="steam">
+      <path d="M100 40 l0 -14 M92 44 l-8 -10 M108 44 l8 -10"/>
+    </g>
+    <g transform="rotate(-14 70 100)">
+      <path d="M48 52 h44 q2 40 -22 48 q-24 -8 -22 -48 z" fill="none" stroke="var(--bowl)" stroke-width="4"/>
+      <path d="M51 72 h38 q-3 22 -19 27 q-16 -5 -19 -27 z" fill="var(--broth)"/>
+      <line x1="70" y1="100" x2="70" y2="148" stroke="var(--bowl)" stroke-width="4"/>
+      <line x1="54" y1="150" x2="86" y2="150" stroke="var(--bowl)" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(14 130 100)">
+      <path d="M108 52 h44 q2 40 -22 48 q-24 -8 -22 -48 z" fill="none" stroke="var(--bowl)" stroke-width="4"/>
+      <path d="M111 72 h38 q-3 22 -19 27 q-16 -5 -19 -27 z" fill="var(--broth)"/>
+      <line x1="130" y1="100" x2="130" y2="148" stroke="var(--bowl)" stroke-width="4"/>
+      <line x1="114" y1="150" x2="146" y2="150" stroke="var(--bowl)" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+  <section class="ask">
+    <h1>Dinner date, Elizabeth?</h1>
+    <p>You, me, and a table for two at Sabio on Main in downtown Pleasanton. The reservation's already made.</p>
+    <p class="when" id="when"></p>
+    <div class="choices">
+      <button type="button" data-answer>Yes</button>
+      <button type="button" class="alt" data-answer>Also yes</button>
+    </div>
+  </section>
+
+  <section class="answer" aria-live="polite">
+    <h1>It's a date!</h1>
+    <p>Monday at 6:30. Dress up a little, I'll drive. I love you.</p>
+  </section>
+</main>
+
+<script>
+  // Change this line to your plan
+  const WHEN = "Monday at 6:30 PM";
+
+  document.getElementById("when").textContent = WHEN;
+
+  const card = document.getElementById("card");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll("[data-answer]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      card.classList.add("answered");
+      if (reduceMotion) return;
+      const bits = ["❤️", "🍷", "🥂", "💕", "✨"];
+      for (let i = 0; i < 40; i++) {
+        const h = document.createElement("span");
+        h.className = "heart";
+        h.textContent = bits[i % bits.length];
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.animationDuration = 2.5 + Math.random() * 2.5 + "s";
+        h.style.animationDelay = Math.random() * 1.2 + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+      }
+    });
+  });
+</script>
+</body>
+</html>
